@@ -30,3 +30,21 @@ form#nav-search input.search {
 .signup {
     color: #f5f5f5
 }
+
+.disagree {
+    width: 200px;
+    height: 200px;
+    background: #d44747;
+}
+
+.agree {
+    width: 200px;
+    height: 200px;
+    background: #94b1e6;
+}
+
+.option {
+    margin-left: -2%;
+    margin-right: -2%;
+    z-index: 5;
+}

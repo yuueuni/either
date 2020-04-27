@@ -1,5 +1,5 @@
 <nav class="container navbar navbar-expand-lg navbar-dark ">
-  <a class="navbar-brand logo" href="#">Either</a>
+  <a class="navbar-brand logo" href="{% url 'votes:index' %}">Either</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -10,12 +10,24 @@
       <button class="d-none" type="submit">Search</button>
     </form>
     <ul class="navbar-nav">
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link"><h6>{{ request.user.username }}님, 반갑습니다.</h6></a>
+        </li>
       <li class="nav-item">
-        <a class="nav-link signup" href="#"><h5>Sign Up</h5></a>
+        <a class="nav-link" href="{% url 'accounts:logout' %}"><h6>Logout</h6></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"><h5>Login</h5></a>
-      </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:signup' %}"><h6>Sign Up</h6></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'accounts:login' %}"><h6>Login</h6></a>
+        </li>
+      {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'votes:create' %}"><h6>Submit Question</h6></a>
+        </li>
     </ul>
   </div>
 </nav>

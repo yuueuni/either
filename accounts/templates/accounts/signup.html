@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Sign Up{% endblock %}
 
 {% block content %}
-<h1>login</h1>
+<h1>Sign Up</h1>
+<hr>
+<div class="w-50 mx-auto">
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-primary">가입하기</button>
+  </form>
+</div>
 {% endblock %}

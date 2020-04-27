@@ -4,5 +4,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<h1>login</h1>
+<h1>Login</h1>
+<hr>
+<div class="w-50 mx-auto">
+  <form action="" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-primary">로그인</button>
+  </form>
+</div>
 {% endblock %}
