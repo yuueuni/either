@@ -1,0 +1,16 @@
+.logo {
+    display: block;
+    height: 79px;
+    width: 210px;
+    background : url(https://static.either.io/v2/img/either-logo.png) no-repeat;
+    text-indent: -9999px;
+}
+
+form#nav-search input.search {
+    color: #ccc;
+    padding: 5px 10px 5px 25px;
+    background: #1f1f1f url(https://static.either.io/v2/img/icon-search.png) no-repeat 5px center;
+    border-radius: 15px;
+    border: 1px solid #444;
+    border-top: 1px solid #393939;
+}
