@@ -4,14 +4,23 @@
 {% block title %}A game of preference{% endblock %}
 
 {% block content %}
-<h1>Index</h1>
-<div>
-  {% for vote in votes %}
-    <h2>{{ vote.title }}</h2>
-    <a href="{% url 'votes:detail' vote.pk %}">자세히 보기</a>
-  {% empty %}
-    <h3>등록된 투표가 없습니다.</h3>
-  {% endfor %}
-  <hr>
+<div class="row row-col-1 row-col-md-3">
+  <div class="col mb-4">
+    {% for vote in votes %}
+    <div class="card text-center">
+      <div class="card-header">
+        {{ forloop.counter }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ vote.title }}</h5>
+        <p class="card-text">{{ vote.issue_r }} vs {{ vote.issue_b }}</p>
+        <a href="{% url 'votes:detail' vote.pk %}" class="btn btn-primary">투표하기</a>
+      </div>
+    </div>
+    {% empty %}
+      <h3>등록된 투표가 없습니다.</h3>
+      <h4>첫 번째로 투표를 등록해보세요 !</h4>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

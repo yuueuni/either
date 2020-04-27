@@ -4,13 +4,21 @@
 {% block title %}New Vote{% endblock %}
 
 {% block content %}
-<h1>New Vote</h1>
+{% if request.resolver_match.url_name == 'create' %}
+  <h1>New Vote</h1>
+{% else %}
+  <h1>Modify Vote</h1>
+{% endif %}
 <hr>
 <div class="w-50 mx-auto">
   <form action="" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
-    <button class="btn btn-primary">등록하기</button>
+    {% if request.resolver_match.url_name == 'create' %}
+      <button class="btn btn-primary">등록하기</button>
+    {% else %}
+      <button class="btn btn-primary">수정하기</button>
+    {% endif %}
   </form>
 </div>
 {% endblock %}

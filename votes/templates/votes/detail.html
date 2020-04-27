@@ -8,20 +8,26 @@
 <hr>
 <div class="row justify-content-center text-center align-items-center">
   <div class="col-5 d-flex align-items-center justify-content-center rounded op-red" id="optionRed">
-    <h2>{{ vote.issue_r }}</h2>
+    <h2>{{ vote.issue_r }} : {{ opred }}%</h2>
   </div>
   <div class="col-1">
     <h1 class="option">OR</h1>
   </div>
   <div class="col-5 d-flex align-items-center justify-content-center rounded op-blue" id="optionBlue">
-    <h2>{{ vote.issue_b }}</h2>
+    <h2>{{ vote.issue_b }} : {{ opblue }}%</h2>
   </div>
 </div>
-<div>
-  <h3>현재 투표 상황</h3>
-
-</div>
 <hr>
+<div class="d-flex justify-content-end">
+  <form action="{% url 'votes:update' vote.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-primary mr-3">수정</button>
+  </form>
+  <form action="{% url 'votes:delete_vote' vote.pk %}" method="POST">
+    {% csrf_token %}
+    <button class="btn btn-danger">삭제</button>
+  </form>
+</div>
 
 <p class="mb-2">댓글 목록 | <middle><span class="badge badge-secondary">{{ vote.comments.count }}</span></middle></p>
 <form action="{% url 'votes:create_comment' vote.pk %}" method="POST">
@@ -43,10 +49,4 @@
 <br>
 <a href="{% url 'votes:index' %}">돌아가기</a>
 
-<script>
-  function resultRate() {
-    if ('#optionRed').on("click") || ('#optionBlue').on("click") {
-
-  }
-</script>
 {% endblock %}

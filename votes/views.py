@@ -4,7 +4,7 @@ from django.views.decorators.http import require_POST
 from .forms import VoteForm, CommentForm
 from .models import Vote, Comment
 from django.db.models import Max
-from random import randint
+from random import choice
 
 
 # Create your views here.
@@ -35,13 +35,46 @@ def create(request):
 
 def detail(request, vote_pk):
     vote = get_object_or_404(Vote, pk=vote_pk)
-    comments = Comment.objects.filter()
+    opred = Comment.objects.filter(user=vote.user, pick='red').count()
+    opblue = Comment.objects.filter(user=vote.user, pick='blue').count()
     form = CommentForm()
     context = {
         'vote': vote,
         'form': form,
+        'opred': round((opred/(opred+opblue))*100),
+        'opblue': round((opblue/(opred+opblue))*100),
     }
     return render(request, 'votes/detail.html', context)
+
+
+@login_required
+def update(request, vote_pk):
+    vote = get_object_or_404(Vote, pk=vote_pk)
+    if request.user == vote.user:
+        if request.method == 'POST':
+            form = VoteForm(request.POST, instance=vote)
+            if form.is_valid():
+                vote = form.save(commit=False)
+                vote.user = request.user
+                vote.save()
+                return redirect('votes:detail', vote_pk)
+        else:
+            form = VoteForm(instance=vote)
+        context = {
+            'form': form
+        }
+        return render(request, 'votes/create_vote.html', context)
+    else:
+        return redirect('votes:index')
+
+
+@require_POST
+@login_required
+def delete_vote(request, vote_pk):
+    vote = get_object_or_404(Vote, pk=vote_pk)
+    if request.user == vote.user:
+        vote.delete()
+    return redirect('votes:index')
 
 
 @require_POST
@@ -67,8 +100,15 @@ def delete_comment(request, vote_pk, comment_pk):
 
 
 def random(request):
-    max_id = Vote.objects.all().aggregate(max_id=Max("pk"))['max_id']
-    while True:
-        idx = randint(1, max_id)
-        if Vote.objects.get(pk=idx):
-            return redirect('votes:detail', idx)
+    # max_id = Vote.objects.all().aggregate(max_id=Max("pk"))['max_id']
+    # while True:
+    #     idx = randint(1, max_id)
+    #     if Vote.objects.get(pk=idx):
+    #         return redirect('votes:detail', idx)
+    votes = Vote.objects.all()
+    rndvote = choice(votes)
+    idx = rndvote.pk
+    context = {
+        'vote': rndvote
+    }
+    return redirect('votes:detail', idx)
