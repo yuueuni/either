@@ -1,3 +1,15 @@
+.banner-wrapper {
+    width: 100%
+    min-width: 960px;
+    background: #222222 url(https://static.either.io/v2/img/bg-banner.png);
+}
+
+.banner {
+    position: relative;
+    margin: 0px auto;
+    width:80%;
+}
+
 .logo {
     display: block;
     height: 79px;
@@ -13,4 +25,8 @@ form#nav-search input.search {
     border-radius: 15px;
     border: 1px solid #444;
     border-top: 1px solid #393939;
+}
+
+.signup {
+    color: #f5f5f5
 }
