@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Vote{% endblock %}
+
+{% block content %}
+<h1>{{ vote.title }}</h1>
+<hr>
+<div class="w-50 mx-auto d-flex align-items-center">
+  <div class="d-flex rounded disagree align-items-center justify-content-center">
+    <h2>{{ vote.issue_a }}</h2>
+  </div>
+  <h4 class="option">OR</h4>
+  <div class="d-flex rounded agree align-items-center justify-content-center">
+    <h2>{{ vote.issue_b }}</h2>
+  </div>
+</div>
+
+<p class="mb-2">
+    댓글 목록
+    <small><span class="badge badge-primary badge-pill">{{ vote.comments.count }}</span></small>
+</p>
+<form action="{% url 'votes:comment' review.pk %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <button class="btn btn-outline-secondary" type="button">등록</button>
+</form>
+{% for comment in vote.comments.all %}
+<div class="d-flex justify-content-between my-2 py-1">
+    <p class="m-0">{{ comment.user }} : {{ comment.content }}</p>
+    {% if comment.user == request.user %}
+    <form action="{% url 'votes:delete_comment' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger btn-sm">삭제</button>
+    </form>
+</div>
+{% endif %}
+{% endfor %}
+
+<a href="{% url 'votes:index' %}">돌아가기</a>
+{% endblock %}

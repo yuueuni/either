@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}A game of preference{% endblock %}
+
+{% block content %}
+<h1>Index</h1>
+<div>
+  {% for vote in votes %}
+    <h2>{{ vote.title }}</h2>
+    <a href="{% url 'votes:detail' vote.pk %}">자세히 보기</a>
+  {% empty %}
+    <h3>등록된 투표가 없습니다.</h3>
+  {% endfor %}
+</div>
+{% endblock %}
