@@ -1,20 +1,23 @@
 from django.db import models
+from django.conf import settings
 
 
 # Create your models here.
 class Vote(models.Model):
     title = models.CharField(max_length=200)
-    issue_a = models.CharField(max_length=500)
+    issue_r = models.CharField(max_length=500)
     issue_b = models.CharField(max_length=500)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='votes')
 
 
 class Comment(models.Model):
-    AGREE = 'AG'
-    DISAGREE = 'DAG'
+    RED = 'red'
+    BLUE = 'blue'
     PICK_CHOICES = (
-        (AGREE, 'Agree'),
-        (DISAGREE, 'Disagree')
+        (RED, 'red'),
+        (BLUE, 'blue')
     )
-    pick = models.CharField(max_length=2, choices=PICK_CHOICES, default=AGREE)
+    pick = models.CharField(max_length=4, choices=PICK_CHOICES, default=RED)
     content = models.CharField(max_length=200)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
     vote = models.ForeignKey(Vote, on_delete=models.CASCADE, related_name='comments')

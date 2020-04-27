@@ -31,20 +31,34 @@ form#nav-search input.search {
     color: #f5f5f5
 }
 
-.disagree {
-    width: 200px;
-    height: 200px;
-    background: #d44747;
+.op-blue {
+    height: 10rem;
+    background: #94b1e6;
+    color: white;
 }
 
-.agree {
-    width: 200px;
-    height: 200px;
-    background: #94b1e6;
+.op-blue:hover {
+    background: black;
+    opacity: .5;
+    cursor: pointer;
+}
+
+.op-red {
+    height: 10rem;
+    background: #d44747;
+    color: white;
+}
+
+.op-red:hover {
+    background: black;
+    opacity: .5;
+    cursor: pointer;
 }
 
 .option {
-    margin-left: -2%;
-    margin-right: -2%;
-    z-index: 5;
+    font-weight: 800;
+}
+
+#resultRate {
+    display: none;
 }
