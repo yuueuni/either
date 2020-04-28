@@ -12,10 +12,8 @@
 
 .logo {
     display: block;
-    height: 79px;
-    width: 210px;
-    background : url(https://static.either.io/v2/img/either-logo.png) no-repeat;
-    text-indent: -9999px;
+    height: 3rem;
+    width: 3rem;
 }
 
 form#nav-search input.search {
