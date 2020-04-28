@@ -35,14 +35,16 @@ def create(request):
 
 def detail(request, vote_pk):
     vote = get_object_or_404(Vote, pk=vote_pk)
-    opred = Comment.objects.filter(user=vote.user, pick='red').count()
-    opblue = Comment.objects.filter(user=vote.user, pick='blue').count()
+    opred = Comment.objects.filter(vote=vote.pk, pick='red').count()
+    opblue = Comment.objects.filter(vote=vote.pk, pick='blue').count()
     form = CommentForm()
+    if opred or opblue:
+        opred, opblue = (opred/(opred+opblue))*100, (opblue/(opred+opblue))*100
     context = {
         'vote': vote,
         'form': form,
-        'opred': round((opred/(opred+opblue))*100),
-        'opblue': round((opblue/(opred+opblue))*100),
+        'opred': opred,
+        'opblue': opblue,
     }
     return render(request, 'votes/detail.html', context)
 
