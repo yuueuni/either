@@ -7,6 +7,7 @@
   {% bootstrap_css %}
   {% load static %}
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/70bfc8ab18.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="banner-wrapper">
@@ -16,6 +17,12 @@
     {% block content %}
     {% endblock %}
   </div>
+
+<footer>
+  <div>
+    <p></p>
+  </div>
+</footer>
 
   {% bootstrap_javascript jquery='full' %}
 </body>
