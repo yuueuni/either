@@ -1,15 +1,11 @@
 <nav class="container navbar navbar-expand-lg navbar-dark ">
   {% load static %}
-  <img  class="logo" src="{% static '/image/logo.png' %}"><a class="navbar-brand ml-2" href="{% url 'votes:index' %}"><h5>CHOOSE</h5></a>
+  <a class="d-flex align-items-center navbar-brand mr-3" href="{% url 'votes:index' %}"><img  class="logo mr-2" src="{% static '/image/logo.png' %}"><h5>CHOOSE</h5></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-    <form class="my-2 my-lg-0" id="nav-search">
-      <input class="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="d-none" type="submit">Search</button>
-    </form>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
     <ul class="navbar-nav">
       {% if request.user.is_authenticated %}
         <li class="nav-item">

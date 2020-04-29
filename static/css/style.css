@@ -1,7 +1,7 @@
 .banner-wrapper {
     width: 100%
     min-width: 960px;
-    background: #222222 url(https://static.either.io/v2/img/bg-banner.png);
+    background: #222222;
 }
 
 .banner {
@@ -54,9 +54,18 @@ form#nav-search input.search {
 }
 
 .option {
+    z-index: 5;
+}
+
+.option h1 {
     font-weight: 800;
 }
 
 #resultRate {
     display: none;
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
 }
