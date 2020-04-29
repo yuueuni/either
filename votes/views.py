@@ -39,7 +39,7 @@ def detail(request, vote_pk):
     opblue = Comment.objects.filter(vote=vote.pk, pick='blue').count()
     form = CommentForm()
     if opred or opblue:
-        opred, opblue = (opred/(opred+opblue))*100, (opblue/(opred+opblue))*100
+        opred, opblue = round((opred/(opred+opblue))*100), round((opblue/(opred+opblue))*100)
     context = {
         'vote': vote,
         'form': form,
