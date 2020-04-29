@@ -4,16 +4,17 @@
 {% block title %}A game of preference{% endblock %}
 
 {% block content %}
-<div class="card-columns">
+<div class="row row-cols-1 row-cols-md-3">
   {% for vote in votes %}
-  <div class="card text-center">
-    <div class="card-header">
-      {{ forloop.counter }}
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">{{ vote.title }}</h5>
-      <p class="card-text">{{ vote.issue_r }} vs {{ vote.issue_b }}</p>
-      <a href="{% url 'votes:detail' vote.pk %}" class="btn btn-primary">투표하기</a>
+  <div class="col-4 mb-4">
+    <div class="card text-center">
+      <div class="card-header">
+        <h5 class="card-title mb-0">{{ vote.title }}</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">{{ vote.issue_r }} vs {{ vote.issue_b }}</p>
+        <a href="{% url 'votes:detail' vote.pk %}" class="btn btn-primary btn-sm">투표하기</a>
+      </div>
     </div>
   </div>
   {% empty %}
