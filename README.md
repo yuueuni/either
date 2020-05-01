@@ -2,7 +2,7 @@
 > [either](http://either.io/) clone project
 
 ## AWS EC2
-- http://bitly.kr/choose
+- ~~http://bitly.kr/choose~~
 
 ## Version
 - Django : 2.1.15
